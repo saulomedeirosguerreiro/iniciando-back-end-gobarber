@@ -20,12 +20,14 @@ module.exports = {
   ],
   rules: {
     'prettier/prettier': 'error',
+    'no-useless-constructor': 'off',
     'class-methods-use-this': 'off',
     'import/extensions': [
       'error', 'ignorePackages', {
         ts: 'never',
       },
     ],
+    //'@typescript-eslint/interface-name-prefix': ['error', {'prefixWithI':'always'}]
   },
   settings: {
     'import/resolver': {
