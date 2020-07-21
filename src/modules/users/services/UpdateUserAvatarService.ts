@@ -4,8 +4,8 @@ import { injectable, inject } from 'tsyringe';
 import uploadConfig from '@config/upload';
 import User from '@modules/users/infra/typeorm/entities/Users';
 import AppError from '@shared/errors/AppError';
-import IUserRepository from '../repositories/IUserRepository';
 import IStorageProvider from '@shared/providers/StorageProvider/models/IStorageProvider';
+import IUserRepository from '../repositories/IUserRepository';
 
 interface Request {
     userId: string;
@@ -30,7 +30,7 @@ class UpdateUserAvatarService {
         }
 
         if (user.avatar) {
-           await this.storageProvider.deleteFile(user.avatar);
+            await this.storageProvider.deleteFile(user.avatar);
         }
 
         const filename = await this.storageProvider.saveFile(avatarFilename);

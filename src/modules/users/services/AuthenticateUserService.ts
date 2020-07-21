@@ -3,8 +3,8 @@ import { injectable, inject } from 'tsyringe';
 import User from '@modules/users/infra/typeorm/entities/Users';
 import authConfig from '@config/auth';
 import AppError from '@shared/errors/AppError';
-import IUserRepository from '../repositories/IUserRepository';
 import IHashProvider from '@modules/users/providers/HashProvider/models/IHashProvider';
+import IUserRepository from '../repositories/IUserRepository';
 
 interface Request {
     email: string;
@@ -30,7 +30,10 @@ class AuthenticateUserService {
             throw new AppError('Incorrect email/password combination', 401);
         }
 
-        const passwordMatched = this.hashProvider.compareHash(password, user.password);
+        const passwordMatched = await this.hashProvider.compareHash(
+            password,
+            user.password
+        );
 
         if (!passwordMatched) {
             throw new AppError('Incorrect email/password combination', 401);
